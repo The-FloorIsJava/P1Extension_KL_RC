@@ -13,26 +13,22 @@ function employeeLogin(form){
         })
     })
     .then(response =>{
+        console.log(response)
         console.log(response.status)
             if(response.status === 404){
                 throw new Error(response.text().then(body=>console.log(body)))
             }
             console.log(...response.headers)
-            document.getElementById("login-form").innerHTML = "<h1 id='welcome'> Welcome to the Employee Website," +username+" </h1><a href= '../employee/employee.html'> Employee"
+            document.getElementById("login-form").innerHTML = "<h1 id='welcome'> Welcome to the Employee Website," +username+" </h1><a href= '../employee/employee.html'> Employee</a>"
             console.log(password)
             logoutButton()
             window.localStorage.setItem("token", reponse.headers.get("authorization"))
-        }
-    })
+        })
     .catch(error =>{
         console.error(error)
-    })
+    document.getElementById("login-form").innerHTML = `${loginInitial} <h1> Failed to login please try again</h1>`
 
-
-    document.getElementById("login-form").innerHTML = "<h1 id='welcome'> Welcome to your account" +username
-    console.log(password)
-    logoutButton()
-
+})
 }
 
 function logoutButton(){
